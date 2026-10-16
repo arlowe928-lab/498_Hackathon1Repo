@@ -1,9 +1,9 @@
-# Find Candidate Meals Task Specification
+# Find candidate meals Task Specification
 
 ```yaml
 # BASIC INFORMATION
 task_id: "T4"
-task_name: "Find Candidate Meals"
+task_name: "Find candidate meals"
 task_owner: "Cookable workflow owner (student project team)"
 ```
 
