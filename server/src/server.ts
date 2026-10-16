@@ -1,9 +1,23 @@
 import { createServer } from "node:http";
+import { readFile } from "node:fs/promises";
 import { findCandidateMeals, parseMealRequest, type CookableConfig } from "./cookable.js";
 
 const port = Number(process.env.PORT ?? "3000");
 
 const server = createServer(async (request, response) => {
+  if (request.method === "GET" && (request.url === "/" || request.url === "/index.html")) {
+    await sendAsset(response, "index.html", "text/html; charset=utf-8");
+    return;
+  }
+  if (request.method === "GET" && request.url === "/styles.css") {
+    await sendAsset(response, "styles.css", "text/css; charset=utf-8");
+    return;
+  }
+  if (request.method === "GET" && request.url === "/app.js") {
+    await sendAsset(response, "app.js", "text/javascript; charset=utf-8");
+    return;
+  }
+
   response.setHeader("content-type", "application/json; charset=utf-8");
 
   if (request.method !== "POST" || request.url !== "/api/meals/candidates") {
@@ -81,6 +95,25 @@ async function readRequestBody(request: AsyncIterable<Uint8Array>): Promise<unkn
 function sendJson(response: import("node:http").ServerResponse, status: number, body: unknown): void {
   response.writeHead(status);
   response.end(JSON.stringify(body));
+}
+
+async function sendAsset(
+  response: import("node:http").ServerResponse,
+  filename: string,
+  contentType: string,
+): Promise<void> {
+  try {
+    const content = await readFile(new URL(`../public/${filename}`, import.meta.url));
+    response.writeHead(200, {
+      "content-type": contentType,
+      "cache-control": "no-cache",
+      "x-content-type-options": "nosniff",
+    });
+    response.end(content);
+  } catch (error) {
+    console.error(`Cookable web asset could not be served (${filename}):`, error);
+    sendJson(response, 500, { error: "The Cookable web interface could not be loaded." });
+  }
 }
 
 class RequestTooLargeError extends Error {}

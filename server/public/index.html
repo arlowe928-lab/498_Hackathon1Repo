@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f3ed">
+    <title>Cookable — Recipe ideas</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="wordmark" href="/" aria-label="Cookable home">
+        <span class="wordmark-mark" aria-hidden="true">C</span>
+        <span>Cookable<span class="wordmark-period">.</span></span>
+      </a>
+      <span class="header-note">Simple inspiration for what’s in your kitchen</span>
+    </header>
+
+    <main class="app-shell">
+      <section class="intro">
+        <p class="eyebrow">A LITTLE INSPIRATION FOR WHAT TO COOK</p>
+        <h1>Make something good<br>with what you have.</h1>
+        <p class="intro-copy">Tell us what’s in your kitchen and we’ll find recipe ideas worth exploring.</p>
+      </section>
+
+      <div id="workflow-status" class="workflow-status" role="status" aria-live="polite">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span id="status-text">Ready when you are.</span>
+      </div>
+
+      <section id="workflow-panel" class="workflow-panel" aria-live="polite">
+        <div class="welcome-card">
+          <div class="welcome-copy">
+            <p class="eyebrow">LET’S GET COOKING</p>
+            <h2>Start with the ingredients you already have.</h2>
+            <p>Share a few details about your ingredients and preferences. We’ll bring back ideas you can explore.</p>
+            <button id="start-button" class="button button-primary" type="button">Find a recipe <span aria-hidden="true">→</span></button>
+          </div>
+          <div class="welcome-art" aria-hidden="true">
+            <div class="art-circle"></div>
+            <div class="art-bowl"><span></span></div>
+            <div class="art-leaf art-leaf-one"></div>
+            <div class="art-leaf art-leaf-two"></div>
+            <div class="art-tomato"></div>
+            <div class="art-bean art-bean-one"></div>
+            <div class="art-bean art-bean-two"></div>
+          </div>
+        </div>
+        <p class="safety-note"><strong>A quick note:</strong> Always check the recipe and ingredient labels yourself, especially for allergies or dietary needs.</p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>Cookable · Find something good to make</span>
+      <span>Make the most of what you have</span>
+    </footer>
+  </body>
+</html>
