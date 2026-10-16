@@ -5,6 +5,13 @@
 task_id: "T4"
 task_name: "Find candidate meals"
 task_owner: "Cookable workflow owner (student project team)"
+
+# Agent Inference Configuration
+Provider: Claude
+Model: "claude-haiku-5-5"
+Role: Generate meal candidates and explore alternative meals from the validated request.
+Maximum inference requests per task run: 6
+On inference failure or exhausted limits: Record the unresolved status and hand the case to the Cookable workflow owner (student project team).
 ```
 
 ## 1. Task Goal
