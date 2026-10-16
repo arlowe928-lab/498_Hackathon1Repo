@@ -2,7 +2,7 @@
 
 ## 1. Workflow Overview
 ### 1.1 Workflow Goal
-This workflow supports the system goal defined in `my_first_agent/README.md`.
+This workflow supports the system goal defined in `my_first_agent/agent/README.md`.
 
 ### 1.2 Workflow Trigger
 
