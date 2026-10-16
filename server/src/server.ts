@@ -2,7 +2,6 @@ import { createServer } from "node:http";
 import { findCandidateMeals, parseMealRequest, type CookableConfig } from "./cookable.js";
 
 const port = Number(process.env.PORT ?? "3000");
-const config = readConfig();
 
 const server = createServer(async (request, response) => {
   response.setHeader("content-type", "application/json; charset=utf-8");
@@ -31,14 +30,20 @@ const server = createServer(async (request, response) => {
   }
 
   try {
+    const config = readConfig();
     const result = await findCandidateMeals(mealRequest, config);
     sendJson(response, result.status === "completed" ? 200 : 502, result);
   } catch (error) {
     console.error("Cookable candidate search failed:", error instanceof Error ? error.message : "Unknown error");
     sendJson(response, 502, {
       error: "Candidate search could not be completed. Check server logs and service configuration.",
-      status: "escalated_to_human",
-      nextTask: "Cookable workflow owner",
+      requestId: mealRequest.requestId,
+      status: "search_incomplete",
+      candidates: [],
+      evidenceSummary: "Candidate search failed before it could be completed.",
+      unresolvedIssues: ["Check server logs and service configuration before retrying."],
+      handoffNote: "The search is incomplete; this does not establish that no suitable meal exists.",
+      nextTask: "T6",
     });
   }
 });

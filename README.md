@@ -13,6 +13,7 @@ Example request body:
 
 ```json
 {
+  "requestId": "client-generated-unique-id",
   "ingredients": ["rice", "beans"],
   "preferences": ["vegetarian"],
   "allergies": [],
